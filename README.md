@@ -1,4 +1,4 @@
-# discord-verification
+# ⚡ Discord Emoji Captcha Verification Bot
 uses discord message components to verify users.\
 Please create a role named `Verified` (or edit the source to the bot)\
 \
