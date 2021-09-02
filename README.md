@@ -10,16 +10,8 @@ Some of the emojis are obscure\
 \
 made by Healer
 \
-![img](https://cdn.discordapp.com/attachments/803695735726932004/848259064269504562/unknown.png) \
-![img2](https://cdn.discordapp.com/attachments/803695735726932004/848259452574367804/unknown.png) \
+![img](https://cdn.discordapp.com/attachments/882506445701132308/882507310885380136/unknown.png) \
+![img2](https://cdn.discordapp.com/attachments/881043577180917810/882821878757064784/unknown.png) \
 YOU NEED NODEJS INSTALLED\
 \
-Sources : https://github.com/AngeloCore/discord-buttons \
-Required modules: (or do npm i)
-```
-emoji.json
-discord.js
-discord-buttons
-```
-\
-USE CASES: IF YOU DECIDE TO USE MY IDEA IN YOUR BOT - CREDIT ME PLEASE. THANK YOU
+
