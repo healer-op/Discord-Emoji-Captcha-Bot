@@ -12,6 +12,3 @@ made by Healer
 \
 ![img](https://cdn.discordapp.com/attachments/882506445701132308/882507310885380136/unknown.png) \
 ![img2](https://cdn.discordapp.com/attachments/881043577180917810/882821878757064784/unknown.png) \
-YOU NEED NODEJS INSTALLED\
-\
-
