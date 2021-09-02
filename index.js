@@ -1,5 +1,5 @@
 var emojis = require('emoji.json')
-const token = 'TOKEN' // bad practice, in production use env
+const token = 'YOUR_TOKEN_HERE' // bad practice, in production use env
 
 
 // do not edit below if you dont understand what you are doing
@@ -23,9 +23,8 @@ let acm = {}
 client.on('message', async m => {
     if (!m.guild) return;
     if (m.content == 'z!verify') {
-        m.channel.send('💬 **Check Your Dm**').then(m=>m.delete({timeout:"5000"/*Time until delete in milliseconds*/}));
         if (acm[m.author.id]) {
-            m.channel.send('❌ You are being rate limited.');
+            m.channel.send('❌ You are being rate limited.').then(m=>m.delete({timeout:"5000"/*Time until delete in milliseconds*/}));
             return;
         }
         let emoji = emojis[parseInt(Math.random() * emojis.length)]
@@ -57,12 +56,13 @@ client.on('message', async m => {
 
         var rdmn = rdm(2)
         if (rdmn == 0) {
+            m.channel.send('💬 **Check Your Dm**').then(m=>m.delete({timeout:"5000"/*Time until delete in milliseconds*/}));
             m.author.send('Click the ``' + emoji['name'] + '`` button', {
                 buttons: [
                     button, btn2
                 ]
             }).catch(() => {
-                m.channel.send('❌ Couldnt DM you.')
+                m.channel.send('❌ Couldnt DM you. Try To Type `z!verify1`').then(m=>m.delete({timeout:"5000"/*Time until delete in milliseconds*/}));
                 return;
             })
             acm[m.author.id] = {
@@ -75,7 +75,7 @@ client.on('message', async m => {
                     btn2, button
                 ]
             }).catch(() => {
-                m.channel.send('❌ Couldnt DM you.')
+                m.channel.send('❌ Couldnt DM you. Try To Type `z!verify1`').then(m=>m.delete({timeout:"5000"/*Time until delete in milliseconds*/}));
                 return;
             })
             acm[m.author.id] = {
@@ -86,13 +86,79 @@ client.on('message', async m => {
 
     }
 })
+
+client.on('message', async m => {
+    if (!m.guild) return;
+    if (m.content == 'z!verify1') {
+        if (acm[m.author.id]) {
+            m.channel.send('❌ You are being rate limited.').then(m=>m.delete({timeout:"5000"/*Time until delete in milliseconds*/}));
+            return;
+        }
+        let emoji = emojis[parseInt(Math.random() * emojis.length)]
+        let bad = emojis[parseInt(Math.random() * emojis.length)]
+        if (bad == emoji) {
+            bad = emojis[parseInt(Math.random() * emojis.length)]
+            if (bad == emoji) {
+                bad = emojis[parseInt(Math.random() * emojis.length)]
+                if (bad == emoji) {
+                    bad = emojis[parseInt(Math.random() * emojis.length)]
+                }
+                if (bad == emoji) {
+                    bad = {
+                        'char': 'ok',
+                        'name': 'ok'
+                    }
+                } // yes ik ik fuck u tho - yandere dev 2.0
+            }
+        }
+        let button = new disbut.MessageButton()
+            .setStyle('gray') //default: blurple
+            .setLabel(emoji['char']) //default: NO_LABEL_PROVIDED
+            .setID('v_bot')
+
+        let btn2 = new disbut.MessageButton()
+            .setStyle('gray') //default: blurple
+            .setLabel(bad['char']) //default: NO_LABEL_PROVIDED
+            .setID('v_bot_inv')
+
+        var rdmn = rdm(2)
+        if (rdmn == 0) {
+            m.channel.send('💬 **Check Your Dm**').then(m=>m.delete({timeout:"5000"/*Time until delete in milliseconds*/}));
+            m.channel.send('Click the ``' + emoji['name'] + '`` button', {
+                buttons: [
+                    button, btn2
+                ]
+            }).catch(() => {
+                return;
+            })
+            acm[m.author.id] = {
+                'message': m,
+                'guild': m.guild.id,
+            }
+        } else {
+            m.channel.send('Click the ``' + emoji['name'] + '`` button', {
+                buttons: [
+                    btn2, button
+                ]
+            }).catch(() => {
+                return;
+            })
+            acm[m.author.id] = {
+                'message': m,
+                'guild': m.guild.id,
+            }
+        }
+
+    }
+})
+
 client.on('clickButton', async (button) => {
     if (button.id === 'v_bot') {
         if (acm[button.clicker.user.id.toString()]) {
             var m = acm[button.clicker.user.id.toString()]['message']
             var role = m.guild.roles.cache.find(role => role.name === "• Member");
             await m.member.roles.add(role)
-            button.channel.send(`☑️ **Your Are Now Verified**.\n **🔗All Links** \n ⚡**Website : config** \n ⚡**Client : config** \n ⚡**Panel : config**`);
+            button.channel.send(`☑️ **Your Are Now Verified**.\n **🔗All Links** \n ⚡**Website : https://zeusnodes.xyz** \n ⚡**Client : https://client.zeusnodes.xyz** \n ⚡**Panel : https://auth.zeusnodes.xyz** \n https://cdn.discordapp.com/attachments/881043577180917810/882554526245203978/standard_1.gif`).then(m=>m.delete({timeout:"5000"/*Time until delete in milliseconds*/}));
             button.message.delete()
 
             console.log(acm[button.clicker.user.id.toString()])
